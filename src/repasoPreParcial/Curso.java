@@ -1,17 +1,13 @@
 package repasoPreParcial;
 
+import java.util.List;
+
 public class Curso extends Capacitacion{
 
-	private Capacitacion capacitacion;
 	private Docente docente;
 	private int cantClases;
 	private int duracion;
-	private int credReq;
-	
-	
-	public Capacitacion getCapacitacion() {
-		return capacitacion;
-	}
+	private Integer credReq;
 
 	public Docente getDocente() {
 		return docente;
@@ -25,21 +21,20 @@ public class Curso extends Capacitacion{
 		return duracion;
 	}
 
-	public int getCredReq() {
+	public Integer getCredReq() {
 		return credReq;
 	}
 
-	public Curso(String nombre, boolean prioritaria, Tema tema, boolean estrategico, Capacitacion capacitacion,
-			Docente docente, int cantClases, int duracion, int credReq) {
+	public Curso(String nombre, boolean prioritaria, Tema tema, boolean estrategico,
+			Docente docente, int cantClases, int duracion, Integer credReq) {
 		super(nombre, prioritaria, tema, estrategico);
-		this.capacitacion = capacitacion;
 		this.docente = docente;
 		this.cantClases = cantClases;
 		this.duracion = duracion;
 		this.credReq = credReq;
 	}
 
-	public int obtenerCreditos() {
+	public Integer obtenerCreditos() {
 		int creditos = 0;
 		
 		if(cantClases <= 5)
@@ -59,7 +54,7 @@ public class Curso extends Capacitacion{
 		return creditos;
 	}
 	
-	public double obtenerCosto() {
+	public Double obtenerCosto() {
 		
 		double costo = docente.getCostoXhora() * cantClases * duracion;
 		
@@ -69,4 +64,27 @@ public class Curso extends Capacitacion{
 		return costo;
 		
 	}
+	
+	public static Docente DocenteCursoMayorCantCreditos (List<Capacitacion> capacitaciones) {
+		return ((Curso)capacitaciones.stream()
+				.filter(c -> c instanceof Curso)
+				.max((c1,c2) -> ((Curso) c2).getCredReq().compareTo(((Curso) c1).getCredReq()))
+				.get()).getDocente();
+	}
+
+	@Override
+	public void inscribir(Alumno a) throws CreditosInsuficientesException{
+		if (a.cantCreditos() < this.credReq)
+			throw new CreditosInsuficientesException();
+		//else listaAlumnos.add(a);
+		//listaAlumnos es un atributo que debería tener la clase Capacitacion pero
+		//el enunciado no lo menciona
+		
+	}
+
+	@Override
+	public void aprobar(Alumno a) {
+		
+	}
+	
 }

@@ -5,10 +5,10 @@ public class Docente {
 	private String nombre;
 	private String email;
 	private int antiguedadAnios;
-	private int costoXhora;
+	private double costoXhora;
 	
 	
-	public Docente(String nombre, String email, int antiguedadAnios, int costoXhora) {
+	public Docente(String nombre, String email, int antiguedadAnios, double costoXhora) {
 		super();
 		this.nombre = nombre;
 		this.email = email;
@@ -29,7 +29,7 @@ public class Docente {
 		return antiguedadAnios;
 	}
 
-	public int getCostoXhora() {
+	public double getCostoXhora() {
 		return costoXhora;
 	}
 

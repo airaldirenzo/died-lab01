@@ -35,7 +35,7 @@ public class Taller extends Capacitacion {
 	}
 
 
-	public int obtenerCreditos() {
+	public Integer obtenerCreditos() {
 		//12 creditos -> 6*12 hrs = 72hrs
 		int creditos = 0;
 		if (duracionHrs <= 72)
@@ -48,7 +48,7 @@ public class Taller extends Capacitacion {
 		return creditos;
 	}
 	
-	public double obtenerCosto() {
+	public Double obtenerCosto() {
 		
 		double costo;
 		
@@ -58,7 +58,24 @@ public class Taller extends Capacitacion {
 		
 		return costo;
 	}
-	
-	
+
+	@Override
+	public void inscribir(Alumno a) throws TallerCompletoException {
+		if(cantInscriptos < cupoMax) {
+			//alumnos.add(a);
+			cantInscriptos++;
+		}
+		else throw new TallerCompletoException();
+		
+	}
+	@Override
+	public void aprobar(Alumno a) throws AlumnoNoInscriptoException{
+		/*
+		boolean flag = alumnos.remove(a);
+		if(flag)
+			cantInscriptos--;
+		else throw new AlumnoNoInscriptoException();
+		*/
+	}
 	
 }
