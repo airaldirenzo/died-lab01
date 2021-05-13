@@ -1,6 +1,7 @@
 package repasoPreParcial;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class Alumno {
 
@@ -23,20 +24,14 @@ public class Alumno {
 		return capEnCurso;
 	}
 	
-	public Alumno(String nombre, String nroMatricula, List<Capacitacion> capRealizadas,
-			List<Capacitacion> capEnCurso) {
-		
-		this.nombre = nombre;
-		this.nroMatricula = nroMatricula;
-		this.capRealizadas = capRealizadas;
-		this.capEnCurso = capEnCurso;
-	}
-	
 	public Alumno(String nombre, String nroMatricula) {
 		
 		this.nombre = nombre;
 		this.nroMatricula = nroMatricula;
+		this.capRealizadas = new ArrayList();
+		this.capEnCurso = new ArrayList();
 	}
+	
 	
 	public int cantCreditos() {
 		return Capacitacion.creditosTotales(capRealizadas);
